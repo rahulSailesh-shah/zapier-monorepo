@@ -14,13 +14,13 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(cuid())
+  id              String   @id 
   email           String   @unique
   name            String?
-  password        String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-}
+  provider         AuthProvider
+  }
 
 model Zap {
   id              String   @id @default(cuid())
@@ -84,4 +84,10 @@ model ZapRunOutbox {
   zapRun          ZapRun   @relation(fields: [zapRunId], references: [id])
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  GITHUB
 }

@@ -19,16 +19,20 @@ model User {
   name            String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  provider         AuthProvider
+  provider        AuthProvider
+  zaps            Zap[]
   }
 
 model Zap {
   id              String   @id @default(cuid())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  triggerId       String
+  userId          String
   trigger         Trigger?
   action          Action[]
   run             ZapRun[]
+  user            User     @relation(fields: [userId], references: [id])
 }
 
 model Trigger {
@@ -58,6 +62,7 @@ model Action {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   order           Int               @default(0)
+  sortingOrder    Int               @default(0)
 }
 
 model AvailableActions {

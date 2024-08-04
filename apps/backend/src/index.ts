@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { initPassport } from "./passport";
 import authRoute from "./router/auth";
+import { zapRouter } from "./router/zap";
 import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
@@ -14,7 +15,12 @@ app.use(
     secret: process.env.COOKIE_SECRET || "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // Only use secure in production
+      httpOnly: true,
+      sameSite: "lax", // or 'strict'
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
 
@@ -29,12 +35,14 @@ const allowedHosts = process.env.ALLOWED_HOSTS
 app.use(
   cors({
     origin: allowedHosts,
-    methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 
+app.use(express.json());
+
 app.use("/auth", authRoute);
+app.use("/api/zap", zapRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

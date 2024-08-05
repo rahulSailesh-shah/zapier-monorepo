@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL as string;
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
   const google = () => {
     window.open(`${BACKEND_URL}/auth/google`, "_self");
@@ -21,18 +21,27 @@ const Login = () => {
   const github = () => {
     window.open(`${BACKEND_URL}/auth/github`, "_self");
   };
-
   return (
     <div className="h-screen flex justify-center items-center">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your information to create an account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="first-name">First name</Label>
+                <Input id="first-name" placeholder="Max" required />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="last-name">Last name</Label>
+                <Input id="last-name" placeholder="Robinson" required />
+              </div>
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -43,40 +52,35 @@ const Login = () => {
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a href="#" className="ml-auto inline-block text-sm underline">
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" />
             </div>
             <Button type="submit" className="w-full">
-              Login
+              Create an account
             </Button>
             <Button
               variant="outline"
               className="w-full"
               onClick={() => google()}
             >
-              Login with Google
+              Signup with Google
             </Button>
             <Button
               variant="outline"
               className="w-full"
               onClick={() => github()}
             >
-              Login with Github
+              Signup with Github
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <p
-              onClick={() => navigate("/signup")}
+            Already have an account?{" "}
+            <a
+              onClick={() => navigate("/login")}
               className="underline cursor-pointer"
             >
-              Sign up
-            </p>
+              Sign in
+            </a>
           </div>
         </CardContent>
       </Card>
@@ -84,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

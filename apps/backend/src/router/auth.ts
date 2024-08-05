@@ -3,7 +3,7 @@ import passport from "passport";
 import { db } from "../db";
 const router = Router();
 
-const CLIENT_URL = process.env.AUTH_REDIRECT_URL ?? "http://localhost:5173";
+const CLIENT_URL = process.env.AUTH_REDIRECT_URL ?? "http://localhost:5173/";
 
 interface User {
   id: string;

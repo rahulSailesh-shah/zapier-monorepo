@@ -1,18 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 interface ErrorProps {
   error: string;
-  setError: (error: string | undefined) => void;
 }
 
-const Error: React.FC<ErrorProps> = ({ error, setError }) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setError(undefined);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [error, setError]);
-
+const Error: React.FC<ErrorProps> = ({ error }) => {
   return (
     <div className="toast">
       <div className="alert alert-error">

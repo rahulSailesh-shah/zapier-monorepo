@@ -94,13 +94,25 @@ router.get("/:zapId", async (req: Request, res: Response) => {
         id: zapId,
         userId: user.id,
       },
+      include: {
+        action: {
+          include: {
+            type: true,
+          },
+        },
+        trigger: {
+          include: {
+            type: true,
+          },
+        },
+      },
     });
 
     if (!zap) {
       return res.status(404).json({ message: "Zap not found" });
     }
 
-    res.status(200).json(zap);
+    return res.status(200).json(zap);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });

@@ -5,12 +5,18 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import ZapCreate from "./screens/Zap/ZapCreate";
+import { useError } from "./store/error";
+import Error from "./components/Error";
 
-const App = () => {
+const App: React.FC = () => {
+  const { error } = useError();
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+      {error && <Error error={error} />}
+    </>
   );
 };
 

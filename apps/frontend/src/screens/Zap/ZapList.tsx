@@ -1,15 +1,13 @@
-import Error from "@/components/Error";
-import { useState } from "react";
+import { useError } from "@/store/error";
 import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL as string;
 
 const ZapList = () => {
-  const [error, setError] = useState<string | undefined>();
+  const { setError } = useError();
   const navigate = useNavigate();
 
   const handleCreateZap = async () => {
-    setError(undefined);
     try {
       const response = await fetch(`${BACKEND_URL}/api/zap`, {
         method: "POST",
@@ -45,8 +43,6 @@ const ZapList = () => {
           New Zap
         </button>
       </div>
-
-      {error && <Error error={error} setError={setError} />}
     </div>
   );
 };

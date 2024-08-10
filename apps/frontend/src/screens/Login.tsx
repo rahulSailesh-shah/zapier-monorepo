@@ -1,13 +1,10 @@
-import { Button } from "@/components/ui/button";
 import {
-  Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL as string;
@@ -23,8 +20,8 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <Card className="mx-auto max-w-sm">
+    <div className="dark h-screen flex bg-base-300 justify-center items-center">
+      <div className="card bg-base-100 mx-auto w-96 shadow-sm border">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
@@ -34,52 +31,54 @@ const Login = () => {
         <CardContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
+              <span className="label-text">Email</span>
+
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered w-full max-w-xs"
               />
             </div>
             <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a href="#" className="ml-auto inline-block text-sm underline">
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
+              <span className="label-text">Password</span>
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered w-full max-w-xs"
+              />
+              <a href="#" className="link ml-auto mt-2">
+                Forgot your password?
+              </a>
             </div>
-            <Button type="submit" className="w-full">
+            <button type="submit" className="btn btn-primary">
               Login
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full"
+            </button>
+
+            <div className="flex w-full flex-col border-opacity-50">
+              <div className="divider">OR</div>
+            </div>
+
+            <button
+              className="btn btn-primary btn-outline"
               onClick={() => google()}
             >
               Login with Google
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full"
+            </button>
+            <button
+              className="btn btn-primary btn-outline"
               onClick={() => github()}
             >
               Login with Github
-            </Button>
+            </button>
           </div>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
-            <p
-              onClick={() => navigate("/signup")}
-              className="underline cursor-pointer"
-            >
+            <a onClick={() => navigate("/signup")} className="link">
               Sign up
-            </p>
+            </a>
           </div>
         </CardContent>
-      </Card>
+      </div>
     </div>
   );
 };

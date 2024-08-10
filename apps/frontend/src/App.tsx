@@ -4,31 +4,39 @@ import { useEffect } from "react";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import ZapCreate from "./screens/Zap/ZapCreate";
 
 const App = () => {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+};
+
+const AppRoutes = () => {
   const { user, fetchUser } = useUser();
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
-  return (
-    <BrowserRouter>
+  if (user === null) {
+    return (
       <Routes>
-        <Route
-          path="/"
-          element={user ? <Home /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
-        />
-        <Route
-          path="/signup"
-          element={user ? <Navigate to="/" replace /> : <Signup />}
-        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </BrowserRouter>
+    );
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/zap/:zapId" element={<ZapCreate />} />
+      <Route path="/*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 };
 

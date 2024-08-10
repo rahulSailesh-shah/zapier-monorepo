@@ -17,11 +17,13 @@ router.post("/", async (req: Request, res: Response) => {
     if (!parsedData.success) {
       console.log(parsedData.error);
       return res.status(411).json({
-        message: "Incorrect inputs",
+        body: {
+          message: "Incorrect inputs",
+        },
       });
     }
 
-    await db.$transaction(async (tx) => {
+    const newZap = await db.$transaction(async (tx) => {
       const zap = await tx.zap.create({
         data: {
           triggerId: "",
@@ -42,7 +44,7 @@ router.post("/", async (req: Request, res: Response) => {
         },
       });
 
-      await tx.zap.update({
+      return await tx.zap.update({
         where: {
           id: zap.id,
         },
@@ -51,9 +53,11 @@ router.post("/", async (req: Request, res: Response) => {
         },
       });
     });
+
+    return res.status(200).json({ body: { zapId: newZap.id } });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ body: { message: "Internal server error" } });
   }
 });
 

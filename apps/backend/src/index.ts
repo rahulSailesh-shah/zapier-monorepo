@@ -6,6 +6,8 @@ import { zapRouter } from "./router/zap";
 import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
+import { triggersRouter } from "./router/triggers";
+import { actionsRouter } from "./router/actions";
 
 const app = express();
 
@@ -43,6 +45,8 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/api/zap", zapRouter);
+app.use("/api/triggers", triggersRouter);
+app.use("/api/actions", actionsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

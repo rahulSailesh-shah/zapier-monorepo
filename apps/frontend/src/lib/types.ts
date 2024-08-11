@@ -2,13 +2,12 @@ export interface ZapData {
   id: string;
   createdAt: string;
   updatedAt: string;
-  triggerId: string;
   userId: string;
   action: Action[];
   trigger: Trigger;
 }
 
-interface Action {
+export interface Action {
   id: string;
   actionId: string;
   zapId: string;
@@ -19,15 +18,17 @@ interface Action {
   type: ActionType;
 }
 
-interface ActionType {
+export interface ActionType {
+  icon: string;
   id: string;
   name: string;
   createdAt: string;
   updatedAt: string;
 }
 
-interface Trigger {
+export interface Trigger {
   id: string;
+  icon: string;
   triggerId: string;
   zapId: string;
   createdAt: string;
@@ -35,9 +36,20 @@ interface Trigger {
   type: TriggerType;
 }
 
-interface TriggerType {
+export interface TriggerType {
   id: string;
+  icon: string;
   name: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface DialogState {
+  open: boolean;
+  zapItemData?: {
+    type: "read" | "write";
+    action?: {
+      id: string;
+    };
+  };
 }

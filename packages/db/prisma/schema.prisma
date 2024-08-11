@@ -27,7 +27,6 @@ model Zap {
   id              String   @id @default(cuid())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  triggerId       String
   userId          String
   trigger         Trigger?
   action          Action[]
@@ -48,6 +47,7 @@ model Trigger {
 model AvailableTriggers {
   id              String   @id @default(cuid())
   name            String   @unique
+  icon            String?
   triggers        Trigger[]
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

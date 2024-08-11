@@ -3,50 +3,153 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zap Flow</title>
+    <title>Zapier Interface Clone</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-[#f9d8ae] p-12">
-    <div class="space-y-6">
-      <!-- Trigger Block -->
-      <div
-        class="bg-[#F4A261] border-4 border-dotted border-[#6d2b00] rounded-lg p-6 flex items-center space-x-4"
-      >
-        <div
-          class="bg-[#6d2b00] text-[#F4A261] rounded-full px-2 py-1 text-sm font-bold"
-        >
-          <i class="fas fa-bolt"></i> Trigger
-        </div>
-        <div class="text-lg font-bold text-[#6d2b00]">
-          1. Select the event that starts your Zap
-        </div>
-      </div>
-
-      <!-- Plus Sign -->
-      <div class="flex justify-center text-3xl font-bold text-[#6d2b00]">+</div>
-
-      <!-- Action Block -->
-      <div
-        class="bg-[#F4A261] border-4 border-dotted border-[#6d2b00] rounded-lg p-6 flex items-center space-x-4"
-      >
-        <div
-          class="bg-[#6d2b00] text-[#F4A261] rounded-full px-2 py-1 text-sm font-bold"
-        >
-          <i class="fas fa-bolt"></i> Action
-        </div>
-        <div class="text-lg font-bold text-[#6d2b00]">
-          2. Select the event for your Zap to run
-        </div>
-      </div>
-
-      <!-- Plus Sign -->
-      <div class="flex justify-center text-3xl font-bold text-[#6d2b00]">+</div>
-    </div>
-
-    <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+  </head>
+  <body class="bg-gray-50 p-4">
+    <div class="bg-white shadow-md rounded-lg p-4 max-w-md">
+      <!-- Search Bar -->
+      <div class="relative mb-4">
+        <input
+          type="text"
+          placeholder="Search 7,000+ apps and tools..."
+          class="w-full bg-gray-100 text-gray-700 rounded-lg pl-10 py-2 focus:outline-none"
+        />
+        <i
+          class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+        <a
+          href="#"
+          class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"
+          >Browse all</a
+        >
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex space-x-2 mb-4">
+        <button class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg">
+          Apps
+        </button>
+        <button class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg">
+          Zapier products
+        </button>
+        <button class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg">
+          Built-in tools
+        </button>
+      </div>
+
+      <!-- Your Top Apps -->
+      <div>
+        <h2 class="text-gray-500 mb-2">Your top apps</h2>
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-calendar-alt text-green-500"></i>
+            <span>Google Calendar</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-address-book text-blue-500"></i>
+            <span>Google Contacts</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-file-alt text-blue-500"></i>
+            <span>Google Docs</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-cloud text-blue-500"></i>
+            <span>Google Drive</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-envelope text-red-500"></i>
+            <span>Gmail</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-table text-green-500"></i>
+            <span>Google Sheets</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-slideshare text-blue-500"></i>
+            <span>Google Slides</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fab fa-slack text-purple-500"></i>
+            <span>Slack</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-envelope text-black"></i>
+            <span>Mailchimp</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fab fa-hubspot text-orange-500"></i>
+            <span>HubSpot</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fab fa-neos text-black"></i>
+            <span>Notion</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-bullhorn text-blue-500"></i>
+            <span>Facebook Lead Ads</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popular Built-in Tools -->
+      <div class="mt-6">
+        <h2 class="text-gray-500 mb-2">Popular built-in tools</h2>
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-project-diagram text-orange-500"></i>
+            <span>Webhooks by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-calendar-check text-orange-500"></i>
+            <span>Schedule by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-envelope text-orange-500"></i>
+            <span>Email by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-rss text-orange-500"></i>
+            <span>RSS by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-code text-orange-500"></i>
+            <span>Code by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-envelope-open-text text-orange-500"></i>
+            <span>Email Parser by Zapier</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-cogs text-orange-500"></i>
+            <span>Sub-Zap by Zapier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Zapier Products -->
+      <div class="mt-6">
+        <h2 class="text-gray-500 mb-2">New Zapier products</h2>
+        <div class="space-y-2">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-comments text-orange-500"></i>
+            <span>Zapier Chatbots</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-desktop text-orange-500"></i>
+            <span>Zapier Interfaces</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-table text-orange-500"></i>
+            <span>Zapier Tables</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

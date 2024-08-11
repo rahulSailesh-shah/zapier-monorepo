@@ -24,32 +24,20 @@ router.post("/", async (req: Request, res: Response) => {
     }
 
     const newZap = await db.$transaction(async (tx) => {
-      const zap = await tx.zap.create({
+      return await tx.zap.create({
         data: {
-          triggerId: "",
           userId: user.id,
+          trigger: {
+            create: {
+              triggerId: parsedData.data.availableTriggerId,
+            },
+          },
           action: {
             create: parsedData.data.actions.map((action, index) => ({
               actionId: action.availableActionId,
               sortingOrder: index,
             })),
           },
-        },
-      });
-
-      const trigger = await tx.trigger.create({
-        data: {
-          triggerId: parsedData.data.availableTriggerId,
-          zapId: zap.id,
-        },
-      });
-
-      return await tx.zap.update({
-        where: {
-          id: zap.id,
-        },
-        data: {
-          triggerId: trigger.id,
         },
       });
     });
@@ -95,16 +83,8 @@ router.get("/:zapId", async (req: Request, res: Response) => {
         userId: user.id,
       },
       include: {
-        action: {
-          include: {
-            type: true,
-          },
-        },
-        trigger: {
-          include: {
-            type: true,
-          },
-        },
+        action: true,
+        trigger: true,
       },
     });
 

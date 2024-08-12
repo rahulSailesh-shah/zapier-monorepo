@@ -10,6 +10,7 @@ interface ZapState {
   updateZapTask: (item: DialogState, triggerId: string) => void;
   setAvailableActions: () => Promise<void>;
   setAvailableTriggers: () => Promise<void>;
+  updateZapActionTrigger: (zapId: string) => Promise<void>;
 }
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -69,6 +70,41 @@ export const useZap = create<ZapState>((set, get) => ({
           ),
         },
       });
+    }
+  },
+
+  updateZapActionTrigger: async (zapId: string) => {
+    const currentZap = get().zap;
+    if (!currentZap) return;
+
+    try {
+      const data = {
+        triggerId: currentZap.trigger.triggerId,
+        actions: currentZap.action.map((action) => ({
+          actionId: action.actionId,
+        })),
+      };
+
+      const response = await fetch(`${API_BASE_URL}/api/zap/${zapId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        set({ zap: result });
+      } else {
+        set({ zap: null });
+        useError.getState().setError(result.message);
+      }
+    } catch (error) {
+      set({ zap: null });
+      useError.getState().setError((error as Error).message);
     }
   },
 }));

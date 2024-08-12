@@ -17,3 +17,14 @@ export const ZapCreateSchema = z.object({
     })
   ),
 });
+
+export const ZapUpdateSchema = z.object({
+  triggerId: z.string().optional(),
+  actions: z
+    .array(
+      z.object({
+        actionId: z.string(),
+      })
+    )
+    .optional(),
+});

@@ -9,7 +9,13 @@ const ZapEditor = () => {
   const navigate = useNavigate();
   const { zapId } = useParams<{ zapId: string }>();
   const { error } = useError();
-  const { zap, fetchZap, setAvailableActions, setAvailableTriggers } = useZap();
+  const {
+    zap,
+    fetchZap,
+    setAvailableActions,
+    setAvailableTriggers,
+    updateZapActionTrigger,
+  } = useZap();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,6 +43,11 @@ const ZapEditor = () => {
     setAvailableTriggers,
   ]);
 
+  const publishZap = async () => {
+    if (!zapId) return;
+    await updateZapActionTrigger(zapId);
+  };
+
   if (loading) {
     return (
       <div className="relative">
@@ -50,8 +61,6 @@ const ZapEditor = () => {
     );
   }
 
-  console.log(zap);
-
   return (
     <div className="relative">
       <section
@@ -61,6 +70,9 @@ const ZapEditor = () => {
         {zap && (
           <div>
             <ZapFlow zap={zap} />
+            <button onClick={publishZap} className="btn btn-primary">
+              Publish
+            </button>
           </div>
         )}
       </section>

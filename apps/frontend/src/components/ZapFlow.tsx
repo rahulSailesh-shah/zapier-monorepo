@@ -34,10 +34,16 @@ const ZapFlow: React.FC<ZapFlowProps> = ({ zap }) => {
 
   return (
     <div>
-      <TaskCard setOpen={() => handleOpenDialog(zap.trigger, "read")} />
+      <TaskCard
+        type="read"
+        id={zap.trigger.triggerId}
+        setOpen={() => handleOpenDialog(zap.trigger, "read")}
+      />
       {zap.action.map((action) => (
         <TaskCard
           key={action.id}
+          type="write"
+          id={action.actionId}
           setOpen={() => handleOpenDialog(action, "write")}
         />
       ))}

@@ -1,5 +1,7 @@
+import ZapList from "@/components/ZapList";
+import { ZapData } from "@/lib/types";
 import { useError } from "@/store/error";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL as string;
@@ -8,6 +10,32 @@ const ZapDashboard = () => {
   const { setError } = useError();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [zaps, setZaps] = useState<ZapData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${BACKEND_URL}/api/zap`, {
+          credentials: "include",
+        });
+        const result = await response.json();
+        if (response.ok) {
+          setZaps(result);
+        } else {
+          setError(result.body.message);
+        }
+      } catch (error: unknown) {
+        console.log(error);
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [setError]);
+
+  console.log(zaps);
 
   const handleCreateZap = async () => {
     try {
@@ -57,6 +85,7 @@ const ZapDashboard = () => {
           New Zap
         </button>
       </div>
+      <ZapList zaps={zaps} />
     </div>
   );
 };
